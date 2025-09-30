@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 use App\Models\Task;
 
 class Taskcontroler extends Controller
@@ -23,8 +24,19 @@ class Taskcontroler extends Controller
      */
     public function store(Request $request)
     {
-        $task = Task::create($request->validated());
-        return response()->json($task, Response::HTTP_CREATED);
+
+        $validated = $request->validate([
+            'title' => 'string|max:255',
+            'description' => 'nullable|string',
+            'is_completed' => 'boolean',
+        ]);
+        $task = Task::create($validated);
+        return response()->json([
+            'success' => true,
+            'message' => 'Task created successfully',
+            'data' => $task
+        ], Response::HTTP_CREATED);
+        
     }
     
 
