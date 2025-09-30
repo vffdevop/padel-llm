@@ -18,8 +18,11 @@ RUN useradd -G www-data,root -u 1000 -d /home/laravel laravel
 RUN mkdir -p /home/laravel/.composer && \
     chown -R laravel:laravel /home/laravel
 
-COPY . /var/www
-COPY --chown=laravel:laravel . /var/www
+    COPY . /var/www
+    COPY --chown=laravel:laravel . /var/www
+
+    # Install Composer dependencies
+    RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
 USER laravel
 

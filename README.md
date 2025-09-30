@@ -48,8 +48,21 @@ This repository contains a technical test project built with Laravel. The goal i
 - `Dockerfile` - Application container setup
 - `nginx/default.conf` - Nginx configuration
 
+
 ## Notes
 
 - This project is intended for demonstration and testing purposes.
 - Please refer to the source code and comments for further details.
+
+## Troubleshooting
+
+- If you get errors like `Class "Illuminate\Foundation\Application" not found`, make sure your `composer.lock` is up to date:
+	```sh
+	docker compose exec app composer update
+	```
+- Always use `docker compose` (not `docker-compose`) for all commands.
+- If dependencies are missing, run:
+	```sh
+	docker compose exec app composer install
+	```
 
