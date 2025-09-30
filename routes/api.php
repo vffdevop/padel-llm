@@ -3,8 +3,9 @@
 use Illuminate\Support\Facades\Route;
 
 use Symfony\Component\HttpFoundation\Response;
+use App\Http\Controllers\Api\Taskcontroler;
 
-
+Route::apiResource('tasks', Taskcontroler::class);
 
 Route::get('/health', function () {
             return response()->json([
